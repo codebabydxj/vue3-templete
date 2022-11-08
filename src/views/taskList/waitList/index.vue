@@ -3,10 +3,10 @@
     <div class="base-warp">
       <el-row justify="end">
         <el-col class="tar">
-          <el-button type="success" size="mini">success</el-button>
-          <el-button type="warning" size="mini">warning</el-button>
-          <el-button type="danger" size="mini">danger</el-button>
-          <el-button type="primary" size="mini">查询</el-button>
+          <el-button type="success">success</el-button>
+          <el-button type="warning">warning</el-button>
+          <el-button type="danger">danger</el-button>
+          <el-button type="primary">查询</el-button>
           <el-button type="primary" @click="resetForm">重置</el-button>
         </el-col>
       </el-row>
