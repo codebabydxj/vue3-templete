@@ -48,7 +48,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     base: env.VITE_HOST,
     server: {
       cors: true,
-      port: 8080,
+      port: 9001,
       host: true,
       proxy: { // 代理
         "/api": {
