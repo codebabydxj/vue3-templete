@@ -127,7 +127,6 @@ instance.interceptors.response.use((response: AxiosResponse) => {
   });
   return Promise.reject(error.response);
 });
-
 class Api {
   private request(url: string, options: AxiosRequestConfig, headerConfig?: AxiosRequestConfig) {
     return new Promise<ResponseType>((resolve, reject) => {
@@ -166,6 +165,18 @@ class Api {
     if (method === 'get') reqDate.params = data
     const res = await this.request(url, reqDate)
     downloadFile(res.data, res.data.type, res.headers['content-disposition'])
+  }
+  /** blobToBuffer(url: string, data?:any, method: Method = 'post | get') */
+  public async blobToBuffer(url: string, data?: any, method: Method = 'post') {
+    const reqDate: AxiosRequestConfig = {
+        method: method,
+        responseType: 'blob',
+    }
+    if (method === 'post') reqDate.data = data
+    if (method === 'get') reqDate.params = data
+    const res = await this.request(url, reqDate)
+    const blob = new Blob([res.data], { type: res.data.type })
+    return await blob.arrayBuffer()
   }
   /** jsonp(url: string, params?:any) 这样可以让 Axios 支持 jsonp 的功能 */
   public jsonp(url: string, params?: any, headerConfig: any = { adapter: jsonpAdapter }) {

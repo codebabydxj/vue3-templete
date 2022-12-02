@@ -9,7 +9,9 @@
     "build:pro": "vite build --mode production",
     "preview": "vite preview",
     "lint": "vite lint",
-    "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\""
+    "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
+    "clean": "rmdir /s /q node_modules",
+    "reinstall": "npm run clean && npm install"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -23,8 +25,6 @@
     "mitt": "^3.0.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.27",
-    "postcss-px2rem": "^0.3.0",
-    "px2rem-loader": "^0.1.9",
     "qs": "^6.11.0",
     "sass": "^1.56.1",
     "screenfull": "^6.0.2",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.2.0",
+    "terser": "^5.16.0",
     "typescript": "^4.9.3",
     "vite": "^3.2.4",
     "vite-plugin-compression": "^0.5.1",

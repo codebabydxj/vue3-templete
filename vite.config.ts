@@ -3,13 +3,6 @@ import type { UserConfig, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import viteCompression from 'vite-plugin-compression'
 import { resolve } from "path"
-import px2rem from 'postcss-px2rem'
-
-// 配置基本大小 实现rem px转换
-const postcss = px2rem({
-  // 基准大小 baseSize，需要和rem.js中相同
-  remUnit: 16
-})
 
 const getIPAdress = (ipStart: string = '192') => {
   var interfaces = require('os').networkInterfaces();
@@ -38,13 +31,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         ext: '.gz' // 生成的压缩包后缀
       })
     ],
-    css: {
-      // postcss: {
-      //   plugins: [
-      //     postcss,
-      //   ]
-      // }
-    },
     base: env.VITE_HOST,
     server: {
       cors: true,
@@ -65,7 +51,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         host: getIPAdress()
       }  
     },
-    build: { // 生成环境移除 console debugger
+    build: { // 生产环境移除 console debugger
       minify: 'terser',
       assetsInlineLimit: 8 * 1024, // 如果静态资源体积 >= 4KB，则提取成单独的文件 如果静态资源体积 < 4KB，则作为 base64 格式的字符串内联
       terserOptions: {
