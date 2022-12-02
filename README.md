@@ -9,3 +9,6 @@ https://www.naiveui.com/
 
 # node-sass安装失败
 可以使用 npm install node-sass@npm:dart-sass
+
+# 启动前
+需要在根目录配置.env.development和.env.production
