@@ -1,4 +1,3 @@
-
 <template>
   <flex-card>
     <div class="base-warp">
@@ -64,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-
 </script>
 
 <style scoped lang="scss">
