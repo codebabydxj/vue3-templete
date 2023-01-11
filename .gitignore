@@ -7,7 +7,7 @@ dist-ssr
 
 # local env files
 *.local
-.env.*
+#.env.*
 
 # Log files
 package-lock.json
