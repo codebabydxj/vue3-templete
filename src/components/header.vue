@@ -109,12 +109,10 @@ export default defineComponent({
         ).then(() => {
           fullscreenLoading.value = true
           client.get(API.loginOut)
-          .then(() => {
+          .then(async () => {
             myStore.logout()
-            routers.replace('/login');
-            setTimeout(() => {
-              window.location.reload();
-            }, 100)
+            await routers.replace('/login');
+            window.location.reload();
           }).catch(() => {
           }).finally(() => {
             fullscreenLoading.value = false
@@ -123,7 +121,13 @@ export default defineComponent({
         })
       }
       // 个人中心
+      if (command === 'center') {
+
+      }
       // 设置中心
+      if (command === 'setCore') {
+
+      }
     }
     return {
       fullscreenLoading,
