@@ -20,7 +20,7 @@
           </el-link>
         </el-tooltip>
         <div id="he-plugin-simple"></div>
-        <el-dropdown class="head" @command="handleCommand">
+        <el-dropdown class="head" trigger="click" @command="handleCommand">
           <el-avatar class="avatar" icon="el-icon-user-solid" :size="30"
             src="/src/assets/avatar.png" fit="fill"
             v-loading.fullscreen.lock="fullscreenLoading"></el-avatar>
