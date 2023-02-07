@@ -2,7 +2,9 @@ import { defineConfig, loadEnv } from 'vite'
 import type { UserConfig, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import viteCompression from 'vite-plugin-compression'
-import { resolve } from "path"
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { resolve } from 'path'
+import path from 'path'
 
 const getIPAdress = (ipStart: string = '192') => {
   var interfaces = require('os').networkInterfaces();
@@ -29,6 +31,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         threshold: 10240, // 体积大于 threshold 才会被压缩,单位 b
         algorithm: 'gzip', // 压缩算法,可选 [ 'gzip' , 'brotliCompress' ,'deflate' , 'deflateRaw']
         ext: '.gz' // 生成的压缩包后缀
+      }),
+      createSvgIconsPlugin({ // 全局使用svg
+        iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')], // 指定需要缓存的图标文件夹
+        symbolId: 'icon-[dir]-[name]', // 指定symbolId格式
       })
     ],
     base: env.VITE_HOST,
