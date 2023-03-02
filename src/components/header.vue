@@ -2,20 +2,23 @@
   <header>
     <nav class="navbar-top">
       <div class="tabs-wrap">
-        <slot name="tabs"></slot>
+        <el-tooltip effect="dark" content="支持右键操作" placement="bottom" >
+          <slot name="tabs"></slot>
+        </el-tooltip>
       </div>
       <div class="user-info">
         <el-tooltip effect="dark" content="刷新" placement="bottom">
-          <el-link class="screenfull" @click="refresh">
+          <el-link class="screenfull" :underline="false" @click="refresh">
             <el-icon color="#efefef" :size="20">
               <Refresh />
             </el-icon>
           </el-link>
         </el-tooltip>
         <el-tooltip effect="dark" content="全屏" placement="bottom">
-          <el-link class="screenfull" @click="screenfullTog">
+          <el-link class="screenfull" :underline="false" @click="screenfullTog">
             <el-icon color="#efefef" :size="20">
-              <FullScreen />
+              <fullscreen-outlined v-if="!isFullscreen" />
+              <fullscreen-exit-outlined v-else />
             </el-icon>
           </el-link>
         </el-tooltip>
@@ -86,13 +89,15 @@ export default defineComponent({
     const myStore: any = globalStore()
     const globalFunc: any = inject('globalFunc')
     const fullscreenLoading = ref(false)
+    const isFullscreen = ref(false)
 
     const refresh = () => {
       globalFunc.refreshView()
     }
-    const screenfullTog = () => {
+    const screenfullTog = async () => {
       if (screenfull.isEnabled) {
-        screenfull.toggle();
+        await screenfull.toggle();
+        isFullscreen.value = screenfull.isFullscreen
       } else {
         ElMessage({
           showClose: true,
@@ -140,6 +145,7 @@ export default defineComponent({
     }
     return {
       fullscreenLoading,
+      isFullscreen,
       refresh,
       screenfullTog,
       handleCommand,
