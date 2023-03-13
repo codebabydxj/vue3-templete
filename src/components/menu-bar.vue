@@ -47,7 +47,7 @@
         </template>
       </el-sub-menu>
     </el-menu>
-    <div class="eo" :class="{ 'active': isActive }">
+    <div class="user-sel eo" :class="isActive ? 'active': 'not-active'">
       <el-tooltip placement="right" :visible="visible" effect="light" :content="isCurCollapse ? '点击折叠' : '点击展开'">
         <img src="../assets/svg/enter.svg" alt="" @mouseenter="visible = true" @mouseleave="visible = false"
           @click="handleSwitch">
@@ -200,11 +200,11 @@ export default defineComponent({
   }
 
   .eo {
-    width: 100%;
     height: 40px;
     line-height: 40px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    background-color: #191a20;
     box-shadow: 0 0 6px -2px var(--color-text);
 
     img {
@@ -217,7 +217,13 @@ export default defineComponent({
     }
   }
 
+  .not-active {
+    transition: width 0.48s;
+    width: 220px;
+  }
+
   .active {
+    width: 64px;
     img {
       transform: rotateY(180deg);
     }
@@ -335,6 +341,7 @@ export default defineComponent({
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 220px;
   min-height: 400px;
+  padding-bottom: 40px;
 }
 
 .navbar-side .el-menu {
