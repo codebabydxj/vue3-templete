@@ -1,5 +1,5 @@
 /** 使用方式
- * <svg-icon name="svg命名" width="自定义，不传有默认" height="自定义，不传有默认" />
+ * <svg-icon name="svg命名" :iconStyle="{ width: '100px', height: '100px'}" />
  */
 import { App } from "vue";
 import SvgIcon from '@/components/svg-icon/index.vue' // svg component

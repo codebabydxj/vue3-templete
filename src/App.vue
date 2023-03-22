@@ -14,7 +14,7 @@
   margin: 0;
 }
 .el-table th {
-  background-color: #e6ebf5 !important;
+  background-color: var(--table-th-bg) !important;
   color: #444444 !important;
 }
 .el-table td {
@@ -50,5 +50,28 @@
 }
 .el-notification {
   z-index: 3000 !important;
+}
+
+.over-card {
+  box-sizing: border-box !important;
+  padding: 20px !important;
+  overflow-x: hidden !important;
+  background-color: #ffffff !important;
+  border: 1px solid var(--main-bg-color) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+// 按钮flex样式
+.flex-right {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+// 配置按钮样式
+.config-btn {
+  margin-bottom: 10px !important;
+  margin-left: 10px !important;
+  cursor: pointer !important;
 }
 </style>
