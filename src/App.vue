@@ -74,4 +74,12 @@
   margin-left: 10px !important;
   cursor: pointer !important;
 }
+
+// 超出省略号
+.text-ellipsis {
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow:ellipsis;
+}
 </style>
