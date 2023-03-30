@@ -73,8 +73,8 @@ export default defineComponent({
     const isActive: any = ref(false)
     const visible = ref(false)
 
-    // 通过inject获取挂载在全局的globalFunc方法，初始化view
-    const globalFunc: any = inject('globalFunc')
+    // 通过inject获取挂载在全局的globalRouter方法，初始化view
+    const globalRouter: any = inject('globalRouter')
     // 获取store
     const myStore: any = globalStore()
 
@@ -126,7 +126,7 @@ export default defineComponent({
     }
     const routeGo = (route: any) => {
       if (route === routeParams.currentRoute) return;
-      globalFunc.openView(route);
+      globalRouter.openView(route);
     }
     const ubfold = (key: any) => {
       if (!isCurCollapse.value) {
