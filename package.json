@@ -16,6 +16,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "@vicons/antd": "^0.12.0",
+    "@vueuse/core": "^9.13.0",
     "axios": "^1.2.0",
     "axios-jsonp": "^1.0.4",
     "axios-retry": "^3.3.1",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.2.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "fast-glob": "^3.2.12",
     "terser": "^5.16.0",
     "typescript": "^4.9.3",
