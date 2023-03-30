@@ -52,7 +52,7 @@ import screenfull from 'screenfull'
 import routers from '@/routers'
 import { globalStore } from '@/store'
 import { client } from '@/utils/https/client';
-import * as API from '@/api';
+import * as API from '@/config/api';
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 export default defineComponent({

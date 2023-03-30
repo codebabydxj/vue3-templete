@@ -4,3 +4,5 @@ declare interface Window {
   vm: any
 }
 declare module 'axios-jsonp'
+declare module 'js-md5';
+declare module 'nprogress';

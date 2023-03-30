@@ -70,11 +70,13 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue';
+import { client } from '@/utils/https/client';
+import * as API from '@/config/api';
+import routers from '@/routers';
+import md5 from 'js-md5';
 import _localStorage from '@/utils/storage/localStorage';
 import { getTimeState } from '@/utils/tools';
-import { client } from '@/utils/https/client';
-import * as API from '@/api';
-import routers from '@/routers';
+import { globalStore } from '@/store'
 import { User, Lock, CircleClose } from '@element-plus/icons-vue';
 import { ElForm, ElNotification } from 'element-plus';
 import verifyCode from '@/components/verifyCode/index.vue';
@@ -85,6 +87,7 @@ export default defineComponent({
   },
   setup() {
     type FormInstance = InstanceType<typeof ElForm>
+    const myStore: any = globalStore()
     const ruleFormRef = ref<FormInstance>();
     const ruleForm = reactive({
       userName: '',
@@ -102,10 +105,12 @@ export default defineComponent({
       formEl.validate(async (valid) => {
         if (valid) {
           loading.value = true
-          const params = { ...ruleForm };
+          const params = { ...ruleForm, password: md5(ruleForm.password) };
           client.post(API.login, params)
           .then((res: any) => {
             _localStorage.set('TOKEN', res.data.token) // 这里存token 根据接口返回自行处理
+            myStore.setUserInfo(res.data) // 登录完成保存用户信息
+
             routers.replace('/');
             ElNotification({
               title: getTimeState(),
