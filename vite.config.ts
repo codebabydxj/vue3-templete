@@ -5,6 +5,7 @@ import viteCompression from 'vite-plugin-compression'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { resolve } from 'path'
 import path from 'path'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 
 const getIPAdress = (ipStart: string = '192') => {
   var interfaces = require('os').networkInterfaces();
@@ -26,6 +27,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   return {
     plugins: [
       vue(),
+      vueJsx(),
       viteCompression({
         verbose: true, // 是否在控制台输出压缩结果
         disable: false, // 是否禁用
