@@ -1,3 +1,7 @@
+import { ref } from "vue";
+import { useDebounceFn } from "@vueuse/core";
+import { globalStore } from '@/store'
+
 /**
  * @description 树形结构数扁平化处理
  * @return array
@@ -133,3 +137,12 @@ export function isObjectValueEqual(a: { [key: string]: any }, b: { [key: string]
 	}
 	return true;
 }
+
+/** 导出获取窗口的宽高 */ 
+export const useWinSize = useDebounceFn(() => {
+  const myStore: any = globalStore()
+  const diffH: any = 123
+  const size = ref({ width: window.innerWidth, height: window.innerHeight, contentHeight: window.innerHeight - diffH });
+  // 窗口变化时候更新 size
+  myStore.setWinSize(size.value)
+})

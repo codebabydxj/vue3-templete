@@ -49,8 +49,22 @@
   -o-text-overflow:ellipsis;
 }
 
+.table-main {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+  .table-header {
+    .header-button-lf {
+      margin-bottom: 15px;
+    }
+  }
+}
+
 // 表格样式
 .el-table {
+  flex: 1;
   // 修复 safari 浏览器表格错位
   table {
     width: 100%;
