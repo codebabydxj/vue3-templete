@@ -55,4 +55,5 @@ npm run build:pro | yarn build:pro
 
 ```text
 - 检测代码 npm run lint | yarn lint
+- 代码格式化 npm run format | yarn format
 ```
