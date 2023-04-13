@@ -1,6 +1,7 @@
 <template>
   <div class="login-container flx-center">
     <div class="login-box">
+      <SwitchDark class="dark" />
       <div class="login-left">
         <img src="../../assets/imgs/login_left.png" alt="login" />
       </div>
@@ -80,10 +81,12 @@ import { globalStore } from '@/store'
 import { User, Lock, CircleClose } from '@element-plus/icons-vue';
 import { ElForm, ElNotification } from 'element-plus';
 import verifyCode from '@/components/verifyCode/index.vue';
+import SwitchDark from "@/components/ThemeDark/index.vue";
 
 export default defineComponent({
   components: {
-    verifyCode
+    verifyCode,
+    SwitchDark
   },
   setup() {
     type FormInstance = InstanceType<typeof ElForm>
@@ -102,7 +105,7 @@ export default defineComponent({
     };
     const submitForm = async (formEl: FormInstance | undefined) => {
       if (!formEl) return;
-      formEl.validate(async (valid) => {
+      formEl.validate(async (valid: any) => {
         if (valid) {
           loading.value = true
           const params = { ...ruleForm, password: md5(ruleForm.password) };
@@ -151,12 +154,13 @@ export default defineComponent({
   min-width: 550px;
   height: 100%;
   min-height: 500px;
-  background-color: #eee;
+  background-color: var(--el-color-info-light-9);
   background-image: url("../../assets/svg/login_bg.svg");
   background-position: 50%;
   background-size: 100% 100%;
   background-size: cover;
   .login-box {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -164,8 +168,13 @@ export default defineComponent({
     width: 96%;
     height: 94%;
     padding: 0 50px;
-    background-color: #fffc;
+    background-color: hsl(0deg 0% 100% / 80%);
     border-radius: 10px;
+    .dark {
+			position: absolute;
+			top: 13px;
+			right: 18px;
+		}
     .login-left {
       width: 800px;
       img {

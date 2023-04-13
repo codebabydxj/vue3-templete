@@ -23,16 +23,10 @@
         </el-icon>
       </template>
     </div>
-    <div class="search-btn" v-if="!isCurCollapse" @click="searchTog">
-      <el-icon :size="18" color="#ffffff">
-        <Search />
-      </el-icon>
-    </div>
     <el-menu ref="menuRef" class="user-sel el-menu-vertical-demo" background-color="#191a20" text-color="#fefefea6"
       active-text-color="#ffffff" :unique-opened="true" :collapse="!isCurCollapse"
       :default-active="routeParams.currentRoute.split('?')[0] === '/' ? '/welcome' : routeParams.currentRoute.split('?')[0]">
-      <el-sub-menu v-for="routeWrap in routeParams.routerConfigFilterd" :index="routeWrap.key" :key="routeWrap.key"
-        @click.native="ubfold(routeWrap.key)">
+      <el-sub-menu v-for="routeWrap in routeParams.routerConfigFilterd" :index="routeWrap.key" :key="routeWrap.key">
         <template #title>
           <el-icon :size="16">
             <component :is="routeWrap.icon" color="#fefefea6"></component>
@@ -121,20 +115,9 @@ export default defineComponent({
       searchInput.value = '';
       isShowSoIcon.value = true;
     }
-    const searchTog = () => {
-      isCurCollapse.value = true;
-    }
     const routeGo = (route: any) => {
       if (route === routeParams.currentRoute) return;
       globalRouter.openView(route);
-    }
-    const ubfold = (key: any) => {
-      if (!isCurCollapse.value) {
-        isCurCollapse.value = true;
-        setTimeout(() => {
-          menuRef.value.open(key);
-        }, 1000);
-      }
     }
     const handleSwitch = () => {
       isActive.value = !isActive.value
@@ -162,9 +145,7 @@ export default defineComponent({
       visible,
       handleInput,
       cleanInput,
-      searchTog,
       routeGo,
-      ubfold,
       handleSwitch,
     }
   }
@@ -174,14 +155,13 @@ export default defineComponent({
 <style lang="scss">
 .navbar-side {
   flex: 0 0 auto;
-  background-color: #191a20;
+  background-color: var(--main-bg-color);
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
 
   .collapse {
     height: 60px;
-    // background-color: #1a3642;
     box-shadow: 0 0 6px -2px var(--color-text);
     position: relative;
   }
@@ -204,7 +184,7 @@ export default defineComponent({
 
   .admin-title {
     text-align: center;
-    color: #fff;
+    color: var(--color-white);
     font-weight: bold;
     font-size: 16px;
     color: var(--color-text);
@@ -217,7 +197,7 @@ export default defineComponent({
     line-height: 40px;
     position: fixed;
     bottom: 0;
-    background-color: #191a20;
+    background-color: var(--main-bg-color);
     box-shadow: 0 0 6px -2px var(--color-text);
 
     img {
@@ -232,22 +212,22 @@ export default defineComponent({
 
   .not-active {
     transition: width 0.48s;
-    width: 220px;
+    width: 219px;
   }
 
   .active {
-    width: 64px;
+    width: 63px;
     img {
       transform: rotateY(180deg);
     }
   }
 }
 
-.el-sub-menu__title {
+.navbar-side .el-sub-menu__title {
   color: #fefefea6 !important;
 }
 
-.el-sub-menu__title>.el-icon>svg {
+.navbar-side .el-sub-menu__title>.el-icon>svg {
   color: #fefefea6 !important;
 }
 
@@ -256,7 +236,7 @@ export default defineComponent({
 
   .el-sub-menu__title,
   .el-sub-menu__title>.el-icon>svg {
-    color: #ffffff !important;
+    color: var(--color-white) !important;
   }
 }
 
@@ -264,16 +244,20 @@ export default defineComponent({
 
   .el-sub-menu__title,
   .el-sub-menu__title>.el-icon>svg {
-    color: #ffffff !important;
+    color: var(--color-white) !important;
   }
 }
 
 .navbar-side .el-menu>.el-sub-menu.is-opened>.el-menu {
-  background-color: #090a0c !important;
+  background-color: var(--menu-bg-color) !important;
+}
+
+.navbar-side .el-menu>.el-sub-menu.is-opened>.el-menu>.el-menu-item {
+  background-color: var(--menu-bg-color) !important;
 }
 
 .navbar-side .el-menu>.el-sub-menu.is-opened>.el-menu>.el-menu-item.is-active {
-  background-color: #1a3642 !important;
+  background-color: var(--el-color-primary) !important;
 }
 
 .navbar-side .el-menu>.el-sub-menu>.el-menu>.el-menu-item {
@@ -281,13 +265,13 @@ export default defineComponent({
 }
 
 .navbar-side .el-menu>.el-sub-menu.is-opened>.el-menu>.el-menu-item:hover {
-  color: #ffffff !important;
-  background-color: #090a0c !important;
+  color: var(--color-white) !important;
+  background-color: var(--menu-bg-color) !important;
 }
 
 .navbar-side .el-menu>.el-sub-menu.is-opened>.el-menu>.el-menu-item.is-active:hover {
-  color: #ffffff !important;
-  background-color: #1a3642 !important;
+  color: var(--color-white) !important;
+  background-color: var(--el-color-primary) !important;
 }
 
 .navbar-side .el-menu>.el-sub-menu.is-opened>.el-menu>.el-menu-item.is-active::after {
@@ -296,7 +280,7 @@ export default defineComponent({
   position: absolute;
   width: 0px;
   height: 0px;
-  border-right: 8px solid #fff;
+  border-right: 8px solid var(--color-white);
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   right: 0;
@@ -351,7 +335,7 @@ export default defineComponent({
   transition: background-color .5s, color .5s;
 }
 
-.el-menu-vertical-demo:not(.el-menu--collapse) {
+.navbar-side .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 220px;
   min-height: 400px;
   padding-bottom: 40px;
@@ -363,7 +347,7 @@ export default defineComponent({
 
 .navbar-side::-webkit-scrollbar {
   /*滚动条整体样式*/
-  width: 8px;
+  width: 6px;
   /*高宽分别对应横竖滚动条的尺寸*/
   height: 1px;
 }
@@ -378,7 +362,6 @@ export default defineComponent({
 .navbar-side::-webkit-scrollbar-track {
   /*滚动条里面轨道*/
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  // border-radius: 10px;
-  background: #191a20;
+  background: var(--main-bg-color);
 }
 </style>
