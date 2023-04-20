@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" name="Editor">
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
@@ -42,7 +42,7 @@ export default {
     const toolbarConfig = {}
 
     // 编辑器配置
-    const editorConfig = {
+    const editorConfig: any = {
       placeholder: '请输入内容...',
       MENU_CONF: {},
     }
