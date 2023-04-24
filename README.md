@@ -69,3 +69,10 @@ npm run build:pro | yarn build:pro
 - 检测代码 npm run lint | yarn lint
 - 代码格式化 npm run format | yarn format
 ```
+
+### 项目后台接口 🧩
+
+项目后台接口完全采用 Mock 数据，感谢以下 Mock 平台支持：
+
+- FastMock： https://www.fastmock.site
+- EasyMock：https://mock.mengxuegu.com

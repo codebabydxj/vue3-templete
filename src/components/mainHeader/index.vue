@@ -61,7 +61,7 @@
 <script setup lang="ts" name="MainHeader">
 import { inject, onMounted, ref } from 'vue'
 import screenfull from 'screenfull'
-import routers from '@/routers'
+import { useRouter } from 'vue-router'
 import { globalStore } from '@/store'
 import { client } from '@/utils/https/client';
 import * as API from '@/config/api';
@@ -97,6 +97,7 @@ onMounted(() => {
   document.getElementsByTagName('head')[0].appendChild(script)
 })
 
+const router = useRouter()
 const myStore: any = globalStore()
 const globalRouter: any = inject('globalRouter')
 const fullscreenLoading = ref(false)
@@ -137,13 +138,15 @@ const handleCommand = (command: any) => {
       }
     ).then(() => {
       fullscreenLoading.value = true
-      client.get(API.loginOut)
+      client.post(API.loginOut)
       .then(async () => {
         // 1.清除store、token存储
         myStore.logout()
         // 2.重定向登录页
-        await routers.replace('/login');
-        // 3.刷新页面清除一些浏览器缓存问题
+        await router.replace('/login');
+        // 3. 提示
+        ElMessage.success("退出登录成功！");
+        // 4.刷新页面清除一些浏览器缓存问题，不合理页面会刷新两次！！！！ 寻找好办法
         window.location.reload();
       }).catch(() => {
       }).finally(() => {
