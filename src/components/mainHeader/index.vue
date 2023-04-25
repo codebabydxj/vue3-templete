@@ -30,6 +30,7 @@
           </el-link>
         </el-tooltip>
         <div id="he-plugin-simple"></div>
+        <span class="username">{{ userName }}</span>
         <el-dropdown class="head" trigger="click" @command="handleCommand">
           <el-avatar class="avatar" icon="el-icon-user-solid" :size="30"
             src="/src/assets/imgs/avatar.png" fit="fill"
@@ -59,7 +60,7 @@
 </template>
 
 <script setup lang="ts" name="MainHeader">
-import { inject, onMounted, ref } from 'vue'
+import { inject, onMounted, ref, computed } from 'vue'
 import screenfull from 'screenfull'
 import { useRouter } from 'vue-router'
 import { globalStore } from '@/store'
@@ -99,6 +100,7 @@ onMounted(() => {
 
 const router = useRouter()
 const myStore: any = globalStore()
+const userName: any = computed(() => myStore.userInfo.userInfo.userName)
 const globalRouter: any = inject('globalRouter')
 const fullscreenLoading = ref(false)
 const isFullscreen = ref(false)
@@ -179,14 +181,16 @@ header .navbar-top {
   flex-direction: row;
 }
 
+$tab-r-width: 380px;
+
 header .navbar-top .tabs-wrap {
   flex: 1 1 auto;
-  width: calc(100% - 345px);
+  width: calc(100% - $tab-r-width);
 }
 
 header .navbar-top .user-info {
   flex: 0 0 auto;
-  width: 345px;
+  width: $tab-r-width;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -205,5 +209,10 @@ header .navbar-top .user-info .head {
     cursor: pointer;
     background-color: transparent;
   }
+}
+.username {
+  font-size: 15px;
+  margin-right: 15px;
+  color: var(--color-white);
 }
 </style>

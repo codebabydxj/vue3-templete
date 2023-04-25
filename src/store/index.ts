@@ -97,7 +97,7 @@ const globalStore = defineStore({
       window.sessionStorage.clear()
     },
   },
-  persist: piniaPersistConfig('GlobalState', ['themeConfig'])
+  persist: piniaPersistConfig('GlobalState', ['themeConfig', 'userInfo'])
 });
 
 // piniaPluginPersist(持久化存储)
