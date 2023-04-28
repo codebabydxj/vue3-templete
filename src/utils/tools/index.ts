@@ -148,3 +148,37 @@ export const useWinSize = useDebounceFn(() => {
   myStore.setMaxHeight(`${size.value.contentHeight}px`)
   myStore.setWinSize(size.value)
 })
+
+/**
+ * @description 处理无数据情况
+ * @param {String} callValue 需要处理的值
+ * @return string
+ * */
+export const formatValue = (callValue: any) => {
+	// 如果当前值为数组,使用 / 拼接（根据需求自定义）
+	if (Array.isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
+	return callValue ?? "--";
+}
+
+/**
+ * @description 处理 prop 为多级嵌套的情况(列如: prop:user.name)
+ * @param {Object} row 当前行数据
+ * @param {String} prop 当前 prop
+ * @return any
+ * */
+export const handleRowAccordingToProp = (row: { [key: string]: any }, prop: string) => {
+	if (!prop.includes(".")) return row[prop] ?? "--";
+	prop.split(".").forEach(item => (row = row[item] ?? "--"));
+	return row;
+}
+
+/**
+ * @description 处理 prop，当 prop 为多级嵌套时 ==> 返回最后一级 prop
+ * @param {String} prop 当前 prop
+ * @returns {String}
+ * */
+export function handleProp(prop: string) {
+  const propArr = prop.split(".");
+  if (propArr.length == 1) return prop;
+  return propArr[propArr.length - 1];
+}
