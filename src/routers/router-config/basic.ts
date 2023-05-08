@@ -5,8 +5,8 @@ export default {
   access: true,
   routes: [
     {
-      path: '/welcome',
-      key: 'welcome',
+      path: '/home',
+      key: 'home',
       access: true,
       meta: {
         permission: {},
@@ -16,7 +16,7 @@ export default {
       children: [
         {
           path: '',
-          name: 'welcome',
+          name: 'home',
           component: () => import('../../views/basic/index.vue'),
         }, {
           path: '_empty',

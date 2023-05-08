@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'main',
         component: () => import('../views/index.vue'),
-        redirect: '/welcome',
+        redirect: '/home',
         children: allRoutes,
     },
     {

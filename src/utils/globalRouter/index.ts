@@ -4,7 +4,7 @@
  * 
  * 打开页面
  * 1. 一级页面（使用绝对路径） globalRouter.openView('/a');
- * 2. 二级页面（使用相对路径） globalRouter.openView('a/b');
+ * 2. 二级页面（使用相对路径） globalRouter.openView('/a/b');
  * 3. 如果进入到由别的路由控制下的页面，要返回前一个页面 globalRouter.openView('/a/b', true);  否则返回它自己的父级页面就不用带true
  *
  * 返回
@@ -29,14 +29,13 @@ let myStore: any = null
 let routerConfig: any = []
 const backPathKey: any = 'backPath';
 let fullPath: any = null;
-let query: any = {};
-let willOpenPath: any = '';
+let query: any = null;
 
 routers.beforeEach((to: any) => {
   myStore = globalStore() /** 一切为成形之前，使用store，store必须放在路由守卫，否则报错，没有注册pinia??? */
   routerConfig = myStore.routerConfig
   query = to.query;
-  if (to.fullPath !== '/welcome/_empty') {
+  if (to.fullPath !== '/home/_empty') {
     fullPath = to.fullPath;
   }
 })
@@ -63,7 +62,7 @@ const globalRouter = {
     if (needBackPath) {
       path = addParamInPath(path, backPathKey, fullPath);
     }
-    willOpenPath = path;
+    let willOpenPath: any = path;
     // 一级路由
     const rootPath: any = path.match(/^\/[a-zA-Z0-9\_\.\-]*/)[0];
     const curRoute: any = myStore.routes.find((item: any) => item.route === rootPath);
@@ -103,7 +102,7 @@ const globalRouter = {
     myStore.delRoute({ index, count: 1 })
     // 全部删除时回到欢迎界面
     if (myStore.routes.length === 0) {
-      globalRouter.openView('/welcome');
+      globalRouter.openView('/home');
     }
   },
 
@@ -111,7 +110,7 @@ const globalRouter = {
   goView: () => {
     console.log(`%c【全局路由】- 返回上级页面···`, 'color: #b88230')
     // 如果存在backPath这个查询参数，就返回到backPath
-    if (query[backPathKey]) {
+    if (query && query[backPathKey]) {
       globalRouter.openView(query[backPathKey]);
       return;
     }
@@ -126,7 +125,7 @@ const globalRouter = {
     console.log(`%c【全局路由】- 重置页面···`, 'color: #ff65fb')
     // 需要刷新的url
     const _fullPath: any = fullPath;
-    await routers.replace('/welcome/_empty');
+    await routers.replace('/home/_empty');
     nextTick(() => {
       routers.replace(_fullPath);
     });
