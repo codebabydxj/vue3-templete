@@ -4,6 +4,19 @@ import routerConfig from '@/routers/router-config';
 import { errorRouter } from './router-config/error';
 import NProgress from "@/config/nprogress";
 
+/**
+ * @description 📚 路由参数配置简介
+ * @param path ==> 菜单路径
+ * @param name ==> 菜单唯一命名
+ * @param redirect ==> 重定向地址
+ * @param component ==> 视图文件路径
+ * @param meta ==> 菜单信息
+ * @param meta.icon ==> 菜单图标
+ * @param meta.title ==> 菜单标题
+ * @param meta.hidden ==> 是否隐藏
+ * @param meta.isKeepAlive ==> 是否缓存
+ * */
+
 let allRoutes: any = [];
 routerConfig.forEach((item: any) => {
     allRoutes = allRoutes.concat(item.routes);
@@ -11,14 +24,14 @@ routerConfig.forEach((item: any) => {
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        name: 'main',
+        name: 'Main',
         component: () => import('../views/index.vue'),
         redirect: '/home',
         children: allRoutes,
     },
     {
         path: '/login',
-        name: 'login',
+        name: 'Login',
         component: () => import('../views/login/index.vue'),
     },
 ]
