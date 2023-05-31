@@ -24,7 +24,7 @@
       </template>
     </div>
     <el-menu ref="menuRef" class="user-sel el-menu-vertical-demo" background-color="#191a20" text-color="#fefefea6"
-      active-text-color="#ffffff" :unique-opened="true" :collapse="!isCurCollapse"
+      active-text-color="#ffffff" :unique-opened="true" :collapse="!isCurCollapse" :collapse-transition="false"
       :default-active="routeParams.currentRoute.split('?')[0] === '/' ? '/home' : routeParams.currentRoute.split('?')[0]">
       <el-sub-menu v-for="routeWrap in routeParams.routerConfigFilterd" :index="routeWrap.key" :key="routeWrap.key">
         <template #title>
