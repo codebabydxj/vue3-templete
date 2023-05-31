@@ -21,10 +21,10 @@
  * 
  */
 
-import { nextTick } from 'vue'
-import routers from '@/routers'
-import { globalStore } from '@/store'
-import { useKeepAliveStore } from '@/store/keepAlive'
+import { nextTick } from "vue";
+import routers from "@/routers";
+import { globalStore } from "@/store";
+import { useKeepAliveStore } from "@/store/keepAlive";
 
 let myStore: any = null
 let keepAliveStore: any = null

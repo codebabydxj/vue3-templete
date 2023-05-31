@@ -71,14 +71,18 @@ export const areaCodeToCodeList = (code: string, type: any = 'lang'): number[] =
 }
 
 /**
- * @description 获取当前时间对应的提示语
+ * @description 获取当前时间对应的提示语 | 获取当前时间制 AM-PM
  * @return string
  */
-export const getTimeState = (): any => {
+export const getTimeState = (ap: boolean = false): any => {
 	// 获取当前时间
 	let timeNow = new Date();
 	// 获取当前小时
 	let hours = timeNow.getHours();
+  if (ap) {
+    if (hours >= 0 && hours <= 12) return 'AM'
+    return 'PM';
+  }
 	// 判断当前时间段
 	if (hours >= 6 && hours <= 10) return `早上好 ⛅`;
 	if (hours >= 10 && hours <= 14) return `中午好 🌞`;
@@ -138,11 +142,21 @@ export function isObjectValueEqual(a: { [key: string]: any }, b: { [key: string]
 	return true;
 }
 
+/**
+ * 提交表单时，滚动自动回到还没有填写的表单处
+ */
+export const formScrollToError = () => {
+  setTimeout(() => {
+    const errorDiv = document.getElementsByClassName('is-error')
+    errorDiv[0].scrollIntoView()
+  }, 0)
+}
+
 /** 导出获取窗口的宽高 */ 
 export const useWinSize = useDebounceFn(() => {
   const myStore: any = globalStore()
-  let diffH: any = 133 // header高度(43) + flexCard组件padding(40) + el-card组件padding(40) + 底部预留(10)
-  if (myStore.pagination) diffH = 185 // + 表格分页(62)
+  let diffH: any = 148 // header高度(43) + flexCard组件padding(40) + el-card组件padding(40) + 底部预留(25)
+  if (myStore.pagination) diffH = 210 // + 表格分页(62)
   const size = ref({ width: window.innerWidth, height: window.innerHeight, contentHeight: window.innerHeight - diffH });
   // 窗口变化时候更新 size，每次重新计算需要重置一些store属性，请在APP.vue文件中修改！！！
   myStore.setMaxHeight(`${size.value.contentHeight}px`)

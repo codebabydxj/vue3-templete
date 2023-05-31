@@ -117,7 +117,7 @@ const maxHeight: any = computed(() => myStore.maxHeight)
 .letter {
   font-size: 16px;
   p {
-    margin: 5px 0;
+    margin: 4px 0;
   }
   .colors {
     color: var(--color-text);

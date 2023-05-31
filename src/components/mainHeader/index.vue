@@ -30,11 +30,12 @@
           </el-link>
         </el-tooltip>
         <div id="he-plugin-simple"></div>
-        <span class="username">{{ userName }}</span>
         <el-dropdown class="head" trigger="click" @command="handleCommand">
-          <el-avatar class="avatar" icon="el-icon-user-solid" :size="30"
-            src="/src/assets/imgs/avatar.png" fit="fill"
-            v-loading.fullscreen.lock="fullscreenLoading"></el-avatar>
+          <div class="drop-box">
+            <span class="username">{{ userName }}</span>
+            <el-avatar class="avatar" icon="el-icon-user-solid" :size="30"
+              src="/src/assets/imgs/avatar.png" fit="fill"></el-avatar>
+          </div>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="center">
@@ -102,7 +103,6 @@ const router = useRouter()
 const myStore: any = globalStore()
 const userName: any = computed(() => myStore.userInfo.userInfo ? myStore.userInfo.userInfo.userName : '')
 const globalRouter: any = inject('globalRouter')
-const fullscreenLoading = ref(false)
 const isFullscreen = ref(false)
 const isShowTheme = ref(false)
 
@@ -139,7 +139,6 @@ const handleCommand = (command: any) => {
         type: 'warning',
       }
     ).then(() => {
-      fullscreenLoading.value = true
       client.post(API.loginOut)
       .then(async () => {
         // 1.清除store、token存储
@@ -149,10 +148,9 @@ const handleCommand = (command: any) => {
         // 3. 提示
         ElMessage.success("退出登录成功！");
         // 4.刷新页面清除一些浏览器缓存问题，不合理页面会刷新两次！！！！ 寻找好办法
-        window.location.reload();
+        // window.location.reload();
       }).catch(() => {
       }).finally(() => {
-        fullscreenLoading.value = false
       });
     }).catch(() => {
     })
@@ -205,14 +203,18 @@ header .navbar-top .user-info .screenfull {
 
 header .navbar-top .user-info .head {
   margin-right: 8px;
-  .avatar {
+  .drop-box {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    background-color: transparent;
+    .username {
+      font-size: 15px;
+      margin-right: 15px;
+      color: var(--color-white);
+    }
+    .avatar {
+      background-color: transparent;
+    }
   }
-}
-.username {
-  font-size: 15px;
-  margin-right: 15px;
-  color: var(--color-white);
 }
 </style>

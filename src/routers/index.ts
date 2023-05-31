@@ -23,17 +23,21 @@ routerConfig.forEach((item: any) => {
 });
 const routes: Array<RouteRecordRaw> = [
     {
+        path: '/login',
+        name: 'Login',
+        component: () => import('../views/login/index.vue'),
+    },
+    {
+        path: '/',
+        redirect: '/home'
+    },
+    {
         path: '/',
         name: 'Main',
         component: () => import('../views/index.vue'),
         redirect: '/home',
         children: allRoutes,
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: () => import('../views/login/index.vue'),
-    },
+    }
 ]
 const routers = createRouter({
     history: createWebHistory(), // createWebHashHistory (hash)
@@ -43,22 +47,24 @@ const routers = createRouter({
 })
 /* 路由权限方案：挂载所有路由 + 全局路由守卫判断权限 */
 routers.beforeEach((to, from, next) => {
+    /** 1.获取store */
     const myStore = globalStore()
-
+    
+    /** 2.开启进度条 */
     NProgress.start();
 
-    /** 1.判断是否是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由到登陆页 */
+    /** 3.判断是否是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由到登陆页 */
     if (to.path.toLocaleLowerCase() === '/login') {
         if (myStore.userInfo.token) return routers.back()
         return next();
     }
     
-    /** 2.判断是否有 Token，没有重定向到 login 页面 */
+    /** 4.判断是否有 Token，没有重定向到 login 页面 */
     if (!myStore.userInfo.token) {
         return next({ path: '/login', replace: true });
     }
 
-    /** 3.正常访问页面 */
+    /** 5.正常访问页面 */
     next()
 })
 /** 路由跳转结束 */
