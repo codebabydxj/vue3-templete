@@ -147,8 +147,8 @@ const handleCommand = (command: any) => {
         await router.replace('/login');
         // 3. 提示
         ElMessage.success("退出登录成功！");
-        // 4.刷新页面清除一些浏览器缓存问题，不合理页面会刷新两次！！！！ 寻找好办法
-        // window.location.reload();
+        // 4.刷新页面清除一些浏览器缓存问题，(比如退出登录，再次登录，菜单按钮不显示) 不合理页面会刷新两次！！！！ 寻找好办法
+        window.location.reload();
       }).catch(() => {
       }).finally(() => {
       });
