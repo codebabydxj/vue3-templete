@@ -39,6 +39,8 @@ const globalStore = defineStore({
         isCollapse: true,
         // 转场动画
         isTransition: true,
+        // 引导页
+        isOpenGuide: true,
       }
     }
   },

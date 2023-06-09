@@ -41,6 +41,15 @@
       <span>页面转场动画</span>
       <el-switch v-model="themeConfig.isTransition" inline-prompt :active-icon="Lock" :inactive-icon="Unlock" @change="changeTransition" />
     </div>
+    <!-- 系统设置 -->
+    <el-divider class="divider" content-position="center">
+      <el-icon><Setting /></el-icon>
+      系统设置
+    </el-divider>
+    <div class="theme-item">
+      <span>是否开启引导页</span>
+      <el-switch v-model="themeConfig.isOpenGuide" inline-prompt :active-icon="Lock" :inactive-icon="Unlock" @change="changeGuide" />
+    </div>
   </el-drawer>
 </template>
 
@@ -65,6 +74,10 @@ const changeCollapse = (val: any) => {
 
 const changeTransition = (val: any) => {
   myStore.setThemeConfig({ ...themeConfig.value, isTransition: val })
+}
+
+const changeGuide = (val: any) => {
+  myStore.setThemeConfig({ ...themeConfig.value, isOpenGuide: val })
 }
 
 // 预定义主题颜色
