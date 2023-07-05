@@ -55,7 +55,7 @@ routers.beforeEach((to, from, next) => {
 
     /** 3.判断是否是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由到登陆页 */
     if (to.path.toLocaleLowerCase() === '/login') {
-        if (myStore.userInfo.token) return routers.back()
+        if (myStore.userInfo.token) return routers.back();
         return next();
     }
     

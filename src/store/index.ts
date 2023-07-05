@@ -93,7 +93,7 @@ const globalStore = defineStore({
       this.currentRoute = '/';
       this.routes = [];
       // 3.清空所有菜单权限
-      this.routerConfig.forEach((v: any) => { v.access = false; });
+      // this.routerConfig.forEach((v: any) => { v.access = false; });
       // 4. 清空常量
       this.consts = [];
       // 5.清空缓存
